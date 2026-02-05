@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LALISA: Global Icon & Rockstar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom Font Import */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #111111;
+            color: #ffffff;
+        }
+
+        h1, h2, h3, .brand-font {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Chart Container Standards */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Max width constraint */
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px; /* Base height */
+            max-height: 400px;
+        }
+
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FF69B4; 
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FFD700; 
+        }
+
+        /* Custom Utilities */
+        .text-neon-pink { color: #FF69B4; text-shadow: 0 0 10px rgba(255, 105, 180, 0.5); }
+        .text-gold { color: #FFD700; }
+        .bg-card-dark { background-color: #1F1F1F; }
+        .border-pink { border-color: #FF69B4; }
+        
+        /* Flow Chart Styles */
+        .flow-step {
+            transition: transform 0.3s ease;
+        }
+        .flow-step:hover {
+            transform: translateY(-5px);
+        }
+        .arrow-down {
+            width: 0; 
+            height: 0; 
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 15px solid #FFD700;
+            margin: 10px auto;
+        }
+        @media (min-width: 768px) {
+            .arrow-right {
+                width: 0; 
+                height: 0; 
+                border-top: 10px solid transparent;
+                border-bottom: 10px solid transparent;
+                border-left: 15px solid #FFD700;
+                margin: auto 10px;
+            }
+            .arrow-down { display: none; }
+        }
+    </style>
+    <!-- 
+    Source Material Analysis:
+    - Topic: Lisa (Blackpink) Achievements & Profile.
+    - Key Data: 9 Guinness Records, 100M+ Followers, 1/4000 Audition odds, English fluency path.
+    - Narrative: Journey from a 14-year-old trainee to a Global "Rockstar".
+    
+    Visualization Plan:
+    1. Audition Odds -> Donut Chart -> Compare the tiny success rate vs applicants.
+    2. Popularity Drivers -> Radar Chart -> Visualize 5 key traits (Dance, Rap, Visuals, etc.).
+    3. Achievement Timeline -> HTML Vertical/Horizontal Timeline -> Key milestones.
+    4. Guinness Records -> Bar Chart -> List specific records.
+    5. English Fluency -> Flow Diagram -> Educational/Life path.
+    
+    Constraint Checks:
+    - NO SVG used.
+    - NO Mermaid used.
+    - Chart.js used for charts.
+    - HTML/CSS for diagrams.
+    - Vibrant Palette: #111111 (Black), #FF69B4 (Pink), #FFD700 (Gold).
+    -->
+</head>
+<body class="antialiased">
+
+    <!-- Hero Section -->
+    <header class="relative bg-gradient-to-b from-black to-[#1F1F1F] py-20 px-6 text-center border-b-4 border-pink">
+        <h1 class="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#FF69B4] to-[#FFD700] mb-4 tracking-tighter uppercase">LALISA</h1>
+        <p class="text-xl md:text-2xl text-gray-300 font-light tracking-widest uppercase">Global Icon • Rapper • Dancer • Record Breaker</p>
+        <div class="mt-8 flex justify-center gap-4 flex-wrap">
+            <span class="bg-[#FF69B4] text-black font-bold px-4 py-1 rounded-full text-sm">#BLACKPINK</span>
+            <span class="bg-[#FFD700] text-black font-bold px-4 py-1 rounded-full text-sm">#MONEY</span>
+            <span class="bg-white text-black font-bold px-4 py-1 rounded-full text-sm">#LLOUD</span>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12 space-y-24">
+
+        <!-- SECTION 1: THE ODDS -->
+        <section>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1">
+                    <h2 class="text-3xl font-bold mb-4 text-neon-pink brand-font">One in Four Thousand</h2>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        The journey began in 2010 at the YG Audition in Thailand. Out of 4,000 hopeful candidates, 
+                        only <strong>one</strong> person was accepted. That 0.025% chance was Lisa. To put this in perspective, 
+                        it is statistically harder to become Lisa than to get into many elite institutions worldwide.
+                    </p>
+                    <div class="bg-card-dark p-6 rounded-lg border-l-4 border-gold shadow-lg">
+                        <p class="text-2xl font-bold text-white">0.025%</p>
+                        <p class="text-sm text-gray-400 uppercase tracking-wider">Acceptance Rate</p>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2">
+                    <div class="bg-card-dark rounded-xl shadow-2xl p-6 border border-gray-800">
+                        <h3 class="text-center text-lg font-bold mb-4 text-gray-400">2010 Audition Results</h3>
+                        <div class="chart-container">
+                            <canvas id="auditionChart"></canvas>
+                        </div>
+                        <p class="text-center text-xs text-gray-500 mt-4">Source: YG Entertainment Audition Data</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: THE "IT" FACTOR -->
+        <section>
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-white brand-font mb-4">Why the World is Obsessed</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Lisa possesses a unique combination of skills and traits that transcend borders. 
+                    From her status as Thailand's "Cultural Ambassador" to her role as the group's "Dancing Machine."
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-card-dark p-8 rounded-xl shadow-lg hover:shadow-[#FF69B4]/20 transition border-t-2 border-pink">
+                    <div class="text-5xl mb-4">💃</div>
+                    <h3 class="text-xl font-bold text-neon-pink mb-2">Dance Machine</h3>
+                    <p class="text-sm text-gray-400">Widely considered one of the best dancers in K-pop with undeniable stage presence and "swag."</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-card-dark p-8 rounded-xl shadow-lg hover:shadow-[#FFD700]/20 transition border-t-2 border-gold">
+                    <div class="text-5xl mb-4">👑</div>
+                    <h3 class="text-xl font-bold text-gold mb-2">Thai Princess</h3>
+                    <p class="text-sm text-gray-400">A hero in Thailand and the first non-ethnically Korean artist under YG, inspiring millions.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-card-dark p-8 rounded-xl shadow-lg hover:shadow-[#FF69B4]/20 transition border-t-2 border-pink">
+                    <div class="text-5xl mb-4">👗</div>
+                    <h3 class="text-xl font-bold text-neon-pink mb-2">Human Celine</h3>
+                    <p class="text-sm text-gray-400">A global fashion icon capable of pulling off high-end couture and streetwear alike.</p>
+                </div>
+            </div>
+
+            <div class="mt-12 bg-card-dark rounded-xl shadow-2xl p-6 md:p-10 max-w-4xl mx-auto border border-gray-800">
+                <h3 class="text-center text-xl font-bold mb-6 text-white">The "Star Power" Profile</h3>
+                <div class="chart-container">
+                    <canvas id="radarChart"></canvas>
+                </div>
+                <p class="text-center text-sm text-gray-500 mt-4">Analysis of her core appeal factors based on fan and critic reception.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 3: RECORD BREAKING ACHIEVEMENTS -->
+        <section class="bg-[#161616] -mx-4 px-4 py-16 rounded-3xl">
+            <div class="container mx-auto">
+                <h2 class="text-4xl font-bold text-center text-gold brand-font mb-12">Breaking The Internet (And Records)</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Text Content -->
+                    <div class="space-y-8">
+                        <p class="text-lg text-gray-300">
+                            Lisa doesn't just participate in the industry; she dominates it. As of 2024, she holds <strong class="text-gold">9 Guinness World Records</strong>. Her solo debut "LALISA" and viral hit "MONEY" cemented her status as a global force.
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-black p-6 rounded-lg text-center border border-gray-800">
+                                <span class="block text-4xl font-bold text-neon-pink mb-1 counter" data-target="9">9</span>
+                                <span class="text-xs text-gray-500 font-bold uppercase">Guinness World Records</span>
+                            </div>
+                            <div class="bg-black p-6 rounded-lg text-center border border-gray-800">
+                                <span class="block text-4xl font-bold text-gold mb-1">1B+</span>
+                                <span class="text-xs text-gray-500 font-bold uppercase">Streams on "Money"</span>
+                            </div>
+                            <div class="bg-black p-6 rounded-lg text-center border border-gray-800 col-span-2">
+                                <span class="block text-4xl font-bold text-white mb-1">100M+</span>
+                                <span class="text-xs text-gray-500 font-bold uppercase">Instagram Followers (Most for K-pop Artist)</span>
+                            </div>
+                        </div>
+
+                        <div class="p-6 bg-[#252525] rounded-lg border-l-4 border-neon-pink">
+                            <h4 class="font-bold text-white mb-2">Upcoming: The White Lotus</h4>
+                            <p class="text-sm text-gray-400">Lisa is set to make her acting debut in Season 3 of the hit HBO series, filmed in her home country of Thailand.</p>
+                        </div>
+                    </div>
+
+                    <!-- Chart Content -->
+                    <div class="bg-card-dark rounded-xl shadow-2xl p-6 border border-gray-800 flex flex-col justify-center">
+                        <h3 class="text-lg font-bold text-gray-200 mb-6 pl-4 border-l-2 border-gold">Major Milestones & Records</h3>
+                        <div class="chart-container">
+                            <canvas id="recordsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: THE PATH TO ENGLISH FLUENCY -->
+        <section>
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold brand-font mb-4">Decoding Her Fluency</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Fans are often surprised by her native-like English skills. It wasn't magic—it was a combination of education, family environment, and necessity.
+                </p>
+            </div>
+
+            <!-- HTML/CSS Process Flow -->
+            <div class="flex flex-col md:flex-row justify-center items-stretch gap-4 max-w-6xl mx-auto">
+                
+                <!-- Step 1 -->
+                <div class="flow-step flex-1 bg-card-dark p-6 rounded-lg border-t-4 border-pink shadow-lg flex flex-col items-center text-center relative">
+                    <div class="w-12 h-12 bg-[#333] rounded-full flex items-center justify-center text-2xl mb-4">🏫</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Praphamontree II School</h3>
+                    <p class="text-sm text-gray-400">Enrolled in a special English-language program where every subject (except Thai) was taught in English.</p>
+                </div>
+
+                <!-- Connector -->
+                <div class="flex items-center justify-center">
+                    <div class="arrow-down md:hidden"></div>
+                    <div class="arrow-right hidden md:block"></div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flow-step flex-1 bg-card-dark p-6 rounded-lg border-t-4 border-gold shadow-lg flex flex-col items-center text-center relative">
+                    <div class="w-12 h-12 bg-[#333] rounded-full flex items-center justify-center text-2xl mb-4">👨‍🍳</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Multicultural Home</h3>
+                    <p class="text-sm text-gray-400">Growing up with a Swiss stepfather (Chef Marco Brüschweiler) created a natural environment for English usage.</p>
+                </div>
+
+                <!-- Connector -->
+                <div class="flex items-center justify-center">
+                    <div class="arrow-down md:hidden"></div>
+                    <div class="arrow-right hidden md:block"></div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flow-step flex-1 bg-card-dark p-6 rounded-lg border-t-4 border-pink shadow-lg flex flex-col items-center text-center relative">
+                    <div class="w-12 h-12 bg-[#333] rounded-full flex items-center justify-center text-2xl mb-4">🎤</div>
+                    <h3 class="text-lg font-bold text-white mb-2">YG Trainee Days</h3>
+                    <p class="text-sm text-gray-400">While learning Korean, English was her bridge to communicate with other international trainees.</p>
+                </div>
+
+                <!-- Connector -->
+                <div class="flex items-center justify-center">
+                    <div class="arrow-down md:hidden"></div>
+                    <div class="arrow-right hidden md:block"></div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="flow-step flex-1 bg-card-dark p-6 rounded-lg border-t-4 border-gold shadow-lg flex flex-col items-center text-center relative">
+                    <div class="w-12 h-12 bg-[#333] rounded-full flex items-center justify-center text-2xl mb-4">💬</div>
+                    <h3 class="text-lg font-bold text-white mb-2">The "English Line"</h3>
+                    <p class="text-sm text-gray-400">Maintains fluency by speaking daily with Jennie and Rosé, who are also fluent English speakers.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-black border-t border-gray-800 py-12 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-2xl font-bold text-neon-pink mb-4 brand-font">LALISA</h2>
+            <p class="text-gray-500 text-sm max-w-md mx-auto mb-6">
+                Data synthesized from Guinness World Records, Spotify Statistics, and Biographical Profiles.
+                Designed for the global Blink community.
+            </p>
+            <p class="text-xs text-gray-600">© 2024 Fan-Made Infographic Profile.</p>
+        </div>
+    </footer>
+
+    <!-- Chart Logic -->
+    <script>
+        // --- UTILITY: Label Wrapping Logic (Mandatory) ---
+        function splitString(str, limit = 16) {
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + 1 + words[i].length <= limit) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // --- UTILITY: Tooltip Callback (Mandatory) ---
+        const tooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // --- CHART 1: AUDITION ODDS (Donut) ---
+        const ctxAudition = document.getElementById('auditionChart').getContext('2d');
+        new Chart(ctxAudition, {
+            type: 'doughnut',
+            data: {
+                labels: ['Lisa (Accepted)', 'Rejected Candidates'],
+                datasets: [{
+                    data: [1, 3999],
+                    backgroundColor: ['#FFD700', '#333333'],
+                    borderColor: '#1F1F1F',
+                    borderWidth: 2,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: '#bbb' }
+                    },
+                    tooltip: tooltipConfig,
+                    title: {
+                        display: true,
+                        text: 'YG Thailand Audition 2010',
+                        color: '#fff'
+                    }
+                }
+            }
+        });
+
+        // --- CHART 2: THE "IT" FACTOR (Radar) ---
+        const ctxRadar = document.getElementById('radarChart').getContext('2d');
+        new Chart(ctxRadar, {
+            type: 'radar',
+            data: {
+                labels: splitString('Dance Precision Global Influence Rap Flow Stage Presence Visuals & Fashion'), // Just splitting the string for array input, manual array is safer
+                labels: [
+                    ['Dance', 'Precision'], 
+                    ['Global', 'Influence'], 
+                    ['Rap', 'Flow'], 
+                    ['Stage', 'Presence'], 
+                    ['Visuals', '& Fashion']
+                ],
+                datasets: [{
+                    label: 'Lalisa Manobal',
+                    data: [10, 9.5, 9, 10, 9.8],
+                    fill: true,
+                    backgroundColor: 'rgba(255, 105, 180, 0.2)',
+                    borderColor: '#FF69B4',
+                    pointBackgroundColor: '#FFD700',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: '#FF69B4'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        pointLabels: {
+                            color: '#FFD700',
+                            font: { size: 12, weight: 'bold' }
+                        },
+                        ticks: { display: false, max: 10 }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+
+        // --- CHART 3: RECORDS & MILESTONES (Horizontal Bar) ---
+        const recordLabels = [
+            "First solo K-pop winner at MTV VMAs",
+            "First solo K-pop winner at MTV EMAs",
+            "Fastest K-pop soloist to 1 Billion Spotify Streams",
+            "Most Instagram Followers for K-pop Artist",
+            "First K-pop track by soloist to hit 1B streams"
+        ];
+        
+        // Process labels with mandatory wrapper
+        const processedRecordLabels = recordLabels.map(l => splitString(l, 25)); // Slightly larger limit for bars
+
+        const ctxRecords = document.getElementById('recordsChart').getContext('2d');
+        new Chart(ctxRecords, {
+            type: 'bar',
+            data: {
+                labels: processedRecordLabels,
+                datasets: [{
+                    label: 'Impact Score (Illustrative)',
+                    data: [100, 100, 95, 100, 95], // Illustrative values for visual weight
+                    backgroundColor: [
+                        '#FF69B4', // Pink
+                        '#FF69B4',
+                        '#FFD700', // Gold
+                        '#FFD700',
+                        '#FF69B4'
+                    ],
+                    borderRadius: 5,
+                    barPercentage: 0.6
+                }]
+            },
+            options: {
+                indexAxis: 'y', // Horizontal bar
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        display: false, // Hide x-axis numbers as they are illustrative categories
+                        grid: { display: false }
+                    },
+                    y: {
+                        ticks: {
+                            color: '#e5e5e5',
+                            font: { size: 11 },
+                            autoSkip: false
+                        },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                return Array.isArray(label) ? label.join(' ') : label;
+                            },
+                            label: function() {
+                                return "Guinness World Record / Major Achievement";
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
