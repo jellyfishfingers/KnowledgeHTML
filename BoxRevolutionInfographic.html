@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Box That Changed The World: An Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <style>
+        /* Custom Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8; /* Light gray-blue background */
+            color: #1e293b;
+        }
+
+        /* Palette Definition: "Vibrant Industry"
+           Primary Blue: #2563EB (Tailwind Blue-600)
+           Container Red: #DC2626 (Tailwind Red-600)
+           Safety Yellow: #FBBF24 (Tailwind Amber-400)
+           Success Green: #10B981 (Tailwind Emerald-500)
+        */
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        @media (max-width: 640px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+
+        /* Timeline CSS (NO SVG) */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background-color: #cbd5e1;
+            z-index: 0;
+        }
+        
+        .timeline-point {
+            width: 20px;
+            height: 20px;
+            background-color: #2563EB;
+            border-radius: 50%;
+            border: 4px solid #ffffff;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* Card Hover Effects */
+        .info-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Custom Bullet Points */
+        .custom-bullet::before {
+            content: "📦";
+            margin-right: 8px;
+        }
+    </style>
+    <!-- 
+    NARRATIVE PLAN:
+    1. Header: Hook with "The Box That Changed the World".
+    2. The Bottleneck (1937): Contextualize the problem (slow, expensive).
+    3. The Revolution (1956): Compare Costs (Old vs New) - The core quantitative data.
+    4. Global Standardization: Timeline of key adoption events.
+    5. The Singapore Connection: Highlight the specific strategic "Kiasu" decision.
+    6. Fun Facts/Scale: Visualizing the massive impact (90% goods, earth wrapping).
+    
+    VISUALIZATION CHOICES (NO SVG):
+    1. Cost Comparison: Vertical Bar Chart (Chart.js). Goal: Compare. Shows the massive drop from $5.83 to $0.16.
+    2. Efficiency Savings: Doughnut Chart (Chart.js). Goal: Inform. Shows percentage saved.
+    3. Global Volume: Pie Chart (Chart.js). Goal: Inform. Shows 90% of goods are containerized.
+    4. Timeline: HTML/CSS Vertical Timeline. Goal: Change/History.
+    5. Container Stack: HTML/CSS Styled blocks. Goal: Visual Interest/Analogy.
+    
+    NO MERMAID JS USED.
+    NO SVG USED.
+    -->
+</head>
+<body class="bg-slate-50">
+
+    <!-- Hero Section -->
+    <header class="bg-gradient-to-r from-blue-700 to-indigo-800 text-white p-12 text-center shadow-lg">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4">The Box That Changed The World</h1>
+        <p class="text-xl md:text-2xl font-light opacity-90">How Malcolm McLean and a simple steel box revolutionized global trade.</p>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-12 space-y-16">
+
+        <!-- Section 1: Introduction & The Problem -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <div class="inline-block bg-amber-400 text-amber-900 font-bold px-3 py-1 rounded-full text-sm mb-2">The Origin Story</div>
+                <h2 class="text-3xl font-bold text-gray-800">1937: The "Aha!" Moment</h2>
+                <p class="text-gray-600 leading-relaxed text-lg">
+                    Before the shipping container, global trade was a logistical nightmare known as <strong>"break-bulk"</strong> shipping. Goods were packed in sacks, barrels, and wooden crates. 
+                </p>
+                <p class="text-gray-600 leading-relaxed text-lg">
+                    Malcolm McLean, a trucker from North Carolina, spent days waiting at ports, watching dockworkers manually haul cotton bales one by one. He realized the inefficiency wasn't just annoying—it was expensive. His radical idea? <strong>Lift the whole truck trailer onto the ship.</strong>
+                </p>
+            </div>
+            <div class="bg-white rounded-xl shadow-md p-8 border-l-8 border-amber-400 info-card">
+                <h3 class="text-xl font-bold mb-4 text-gray-700">The Pre-Container Bottleneck</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <span class="text-2xl mr-3">⚓</span>
+                        <span class="text-gray-600">Ships spent weeks in port being loaded manually.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-2xl mr-3">📉</span>
+                        <span class="text-gray-600">High theft and damage rates for loose cargo.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-2xl mr-3">💰</span>
+                        <span class="text-gray-600">Extremely high labor costs per ton.</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 2: The Economic Revolution (Data Visualization) -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+            <div class="mb-10 text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">The Economics of the Box</h2>
+                <p class="text-gray-600">
+                    In 1956, McLean launched the <em>Ideal X</em>. The impact on cost was immediate and staggering. By standardizing the container, he didn't just lower prices; he obliterated the old economic model of shipping.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                
+                <!-- Chart 1: Cost Comparison -->
+                <div class="flex flex-col items-center">
+                    <h3 class="text-xl font-bold text-gray-700 mb-2">Cost Per Ton to Load</h3>
+                    <p class="text-sm text-gray-500 mb-6 text-center">Comparing Traditional vs. Container Methods</p>
+                    <div class="chart-container">
+                        <canvas id="costChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-500 italic text-center max-w-xs">
+                        From $5.83 down to just $0.16—a reduction of over 90%.
+                    </p>
+                </div>
+
+                <!-- Chart 2: Efficiency Impact -->
+                <div class="flex flex-col items-center">
+                    <h3 class="text-xl font-bold text-gray-700 mb-2">Efficiency Gains</h3>
+                    <p class="text-sm text-gray-500 mb-6 text-center">Percentage of loading cost eliminated</p>
+                    <div class="chart-container">
+                        <canvas id="savingsChart"></canvas>
+                    </div>
+                     <p class="mt-4 text-sm text-gray-500 italic text-center max-w-xs">
+                        The box turned shipping from a luxury expense into a commodity.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Timeline of Adoption -->
+        <section>
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Timeline of a Revolution</h2>
+                <p class="text-gray-600 mt-2">From a trucker's idea to a global standard.</p>
+            </div>
+            
+            <div class="relative max-w-4xl mx-auto">
+                <!-- Vertical Line -->
+                <div class="timeline-line hidden md:block"></div>
+
+                <!-- Timeline Items -->
+                <div class="space-y-8 relative">
+                    
+                    <!-- Item 1 -->
+                    <div class="flex flex-col md:flex-row items-center justify-between group">
+                        <div class="w-full md:w-5/12 text-center md:text-right p-4 bg-white rounded-lg shadow-md info-card z-10">
+                            <h3 class="text-xl font-bold text-blue-600">1937</h3>
+                            <h4 class="font-semibold">The Idea</h4>
+                            <p class="text-sm text-gray-600">Malcolm McLean sits in his truck, frustrated by the slow loading process.</p>
+                        </div>
+                        <div class="timeline-point hidden md:block"></div>
+                        <div class="w-full md:w-5/12"></div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="flex flex-col md:flex-row items-center justify-between group">
+                        <div class="w-full md:w-5/12 order-2 md:order-1"></div>
+                        <div class="timeline-point hidden md:block order-1 md:order-2"></div>
+                        <div class="w-full md:w-5/12 text-center md:text-left p-4 bg-white rounded-lg shadow-md info-card z-10 order-1 md:order-3 border-l-4 border-red-500">
+                            <h3 class="text-xl font-bold text-red-600">1956</h3>
+                            <h4 class="font-semibold">The *Ideal X* Launches</h4>
+                            <p class="text-sm text-gray-600">The first converted tanker sails from NJ to Houston with 58 containers.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="flex flex-col md:flex-row items-center justify-between group">
+                        <div class="w-full md:w-5/12 text-center md:text-right p-4 bg-white rounded-lg shadow-md info-card z-10 border-r-4 border-yellow-400">
+                            <h3 class="text-xl font-bold text-yellow-500">Late 1960s</h3>
+                            <h4 class="font-semibold">Standardization</h4>
+                            <p class="text-sm text-gray-600">McLean releases his patent for corner fittings ("Twistlocks"), creating a global standard.</p>
+                        </div>
+                        <div class="timeline-point hidden md:block"></div>
+                        <div class="w-full md:w-5/12"></div>
+                    </div>
+
+                     <!-- Item 4 -->
+                     <div class="flex flex-col md:flex-row items-center justify-between group">
+                        <div class="w-full md:w-5/12 order-2 md:order-1"></div>
+                        <div class="timeline-point hidden md:block order-1 md:order-2"></div>
+                        <div class="w-full md:w-5/12 text-center md:text-left p-4 bg-white rounded-lg shadow-md info-card z-10 order-1 md:order-3 border-l-4 border-indigo-500">
+                            <h3 class="text-xl font-bold text-indigo-600">1972</h3>
+                            <h4 class="font-semibold">Singapore's Bet Pays Off</h4>
+                            <p class="text-sm text-gray-600">The *MV Nihon* docks. Singapore becomes the first Southeast Asian container hub.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: The Singapore Connection -->
+        <section class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 md:p-16 text-white overflow-hidden relative">
+            <!-- Decorative Background Element (CSS) -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500 opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
+                <div>
+                    <div class="inline-block bg-red-600 text-white font-bold px-3 py-1 rounded text-xs mb-4 uppercase tracking-wide">Case Study</div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Singapore: The Ultimate "Kiasu" Move</h2>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        In 1969, the World Bank advised Singapore <strong>against</strong> building a container terminal, citing high costs and risks. Singapore's leaders ignored them. They understood that to survive, they had to be ahead of the curve.
+                    </p>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        They built the Tanjong Pagar terminal anyway. Today, Singapore is the world’s busiest transshipment hub, proving that the risk was worth the reward.
+                    </p>
+                </div>
+
+                <div class="bg-slate-700/50 p-6 rounded-xl border border-slate-600 flex flex-col justify-center items-center text-center">
+                    <div class="text-6xl mb-4">🇸🇬</div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Global Impact</h3>
+                    <p class="text-blue-300 mb-6">Percentage of household goods in Singapore that arrived via container</p>
+                    
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="singaporeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Fun Facts & Scale -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-blue-500 info-card">
+                <div class="text-4xl mb-4">🌍</div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Earth Wrapping</h3>
+                <p class="text-gray-600 text-sm">
+                    If you lined up all containers passing through Singapore in a year, they would wrap around the Earth several times.
+                </p>
+            </div>
+
+            <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-red-500 info-card">
+                <div class="text-4xl mb-4">👷</div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Labor Drama</h3>
+                <p class="text-gray-600 text-sm">
+                    Dockworkers hated the box. One union leader famously said, "I'd like to sink that son of a b***h," fearing (correctly) that automation would replace jobs.
+                </p>
+            </div>
+
+            <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-yellow-500 info-card">
+                <div class="text-4xl mb-4">🧩</div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">The Lego Analogy</h3>
+                <p class="text-gray-600 text-sm">
+                    Moving 1,000 loose Lego bricks vs. 1 box. Containers turned complex, loose cargo into single, manageable units (TEUs).
+                </p>
+            </div>
+        </section>
+
+        <footer class="text-center text-gray-400 py-12 border-t border-gray-200 mt-12">
+            <p>Generated for educational purposes based on the history of Malcolm McLean.</p>
+        </footer>
+
+    </main>
+
+    <!-- Script for Charts -->
+    <script>
+        // ---------------------------------------------------------
+        // Utility Function: Label Wrapping for Chart.js
+        // ---------------------------------------------------------
+        function wrapLabel(label) {
+            const maxLen = 16;
+            if (label.length <= maxLen) return label;
+            
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + " " + words[i]).length <= maxLen) {
+                    currentLine += " " + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // ---------------------------------------------------------
+        // Global Tooltip Configuration (Mandatory)
+        // ---------------------------------------------------------
+        const globalTooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        // ---------------------------------------------------------
+        // Chart 1: Cost Comparison (Bar Chart)
+        // ---------------------------------------------------------
+        const ctxCost = document.getElementById('costChart').getContext('2d');
+        const costData = {
+            labels: ['Break Bulk Loading', 'Container Loading'].map(wrapLabel),
+            datasets: [{
+                label: 'Cost per Ton ($)',
+                data: [5.83, 0.16],
+                backgroundColor: [
+                    'rgba(239, 68, 68, 0.8)', // Red for expensive
+                    'rgba(16, 185, 129, 0.8)'  // Green for cheap
+                ],
+                borderColor: [
+                    'rgba(239, 68, 68, 1)',
+                    'rgba(16, 185, 129, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        new Chart(ctxCost, {
+            type: 'bar',
+            data: costData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: globalTooltipConfig,
+                    title: {
+                        display: true,
+                        text: 'Cost per Ton: Old vs New'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Cost (USD)' }
+                    }
+                }
+            }
+        });
+
+        // ---------------------------------------------------------
+        // Chart 2: Efficiency Savings (Doughnut)
+        // ---------------------------------------------------------
+        const ctxSavings = document.getElementById('savingsChart').getContext('2d');
+        const savingsData = {
+            labels: ['Cost Eliminated', 'Remaining Cost'].map(wrapLabel),
+            datasets: [{
+                data: [97.2, 2.8], // Calculated percentages based on 5.83 vs 0.16
+                backgroundColor: [
+                    'rgba(37, 99, 235, 0.8)', // Blue
+                    'rgba(203, 213, 225, 0.8)' // Slate 300
+                ],
+                hoverOffset: 4
+            }]
+        };
+
+        new Chart(ctxSavings, {
+            type: 'doughnut',
+            data: savingsData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: globalTooltipConfig,
+                    legend: {
+                        position: 'bottom'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Percentage of Loading Cost Saved'
+                    }
+                }
+            }
+        });
+
+        // ---------------------------------------------------------
+        // Chart 3: Singapore Goods (Pie)
+        // ---------------------------------------------------------
+        const ctxSG = document.getElementById('singaporeChart').getContext('2d');
+        const sgData = {
+            labels: ['Arrived in Container', 'Other Methods'].map(wrapLabel),
+            datasets: [{
+                data: [90, 10],
+                backgroundColor: [
+                    'rgba(251, 191, 36, 0.9)', // Amber
+                    'rgba(255, 255, 255, 0.2)' // White transparent
+                ],
+                borderColor: 'rgba(255, 255, 255, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        new Chart(ctxSG, {
+            type: 'pie',
+            data: sgData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: globalTooltipConfig,
+                    legend: {
+                        position: 'right',
+                        labels: { color: 'white' }
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
